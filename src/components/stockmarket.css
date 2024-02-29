@@ -1,0 +1,29 @@
+.stock-market-container {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.stock-market-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.stock-market-item {
+  margin-bottom: 10px;
+}
+
+.stock-name {
+  font-weight: bold;
+}
+
+.stock-price {
+  color: inherit;
+}
+
+.stock-price.up {
+  color: green;
+}
+
+.stock-price.down {
+  color: red;
+}

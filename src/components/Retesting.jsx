@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const RetestComponent = ({ data, movingAverageLevel, inProgress }) => {
+const RetestComponent = ({ data, movingAverageLevel, inProgress, onRetestingComplete }) => {
   const [retestCandle, setRetestCandle] = useState(null);
 
   useEffect(() => {
@@ -10,16 +10,25 @@ const RetestComponent = ({ data, movingAverageLevel, inProgress }) => {
   }, [inProgress]);
 
   const findRetestCandle = () => {
-    // Implement your logic to find the retest candle
-    // For example, you can iterate through recent candles to find one touching the MA
-    for (let i = data.length - 1; i >=data.length - 4; i--) {
+    let retestingSuccessful = false;
+
+    for (let i = data.length - 1; i >= data.length - 4; i--) {
       const candle = data[i];
-      if (candle.y[2] <= movingAverageLevel && candle.y[1] >= movingAverageLevel) {
-        console.log('Retesting Done')
-        console.log(candle);
+      if (candle && candle.y[2] <= movingAverageLevel && candle.y[1] >= movingAverageLevel) {
+        console.log('Retesting Done');
+        console.log('Retest Candle:', candle);
         setRetestCandle(candle);
+        retestingSuccessful = true;
         break;
       }
+    }
+
+    if (retestingSuccessful) {
+      // Notify parent component that retesting is successful
+      onRetestingComplete(true);
+    } else {
+      // Notify parent component that retesting failed
+      onRetestingComplete(false);
     }
   };
 
@@ -35,7 +44,7 @@ const RetestComponent = ({ data, movingAverageLevel, inProgress }) => {
           <p>Close: {retestCandle.y[3]}</p>
         </div>
       ) : (
-        <p>No retest candle found yet...</p>
+        <p>Searching for a valid retest candle...</p>
       )}
     </div>
   );

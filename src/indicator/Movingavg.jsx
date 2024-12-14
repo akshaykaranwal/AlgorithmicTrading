@@ -9,7 +9,10 @@ function calculateSMA(data, period) {
 
     if (i >= period - 1) {
       const average = sum / period;
-      result.push(average);
+      result.push({
+        x: data[i].x, // Use the same timestamp as the candle
+        y: average,
+      });
 
       // Update sum by subtracting the oldest closing price
       sum -= data[i - (period - 1)].y[3];

@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.45.2",
     "axios": "^1.6.7",
+    "cors": "^2.8.5",
     "lightweight-charts": "^4.1.2",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
@@ -22,8 +23,8 @@
     "yahoo-finance-api": "^0.2.1"
   },
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"AlgorithmicTrading -d build",
+    "predeploy": "npm run build",
+    "deploy": "AlgorithmicTrading -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
